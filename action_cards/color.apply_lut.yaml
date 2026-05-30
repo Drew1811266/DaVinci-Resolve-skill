@@ -1,0 +1,44 @@
+id: "color.apply_lut"
+name: "Apply LUT"
+domain: "color_grading"
+resolve_page: "Color"
+risk_level: "high"
+user_intents:
+  - "apply LUT"
+  - "add film look"
+  - "套 LUT"
+required_inputs:
+  - timeline_or_clip_scope
+  - lut_name_or_path
+optional_inputs:
+  - color_space
+  - node_position
+  - strength
+  - reference_stills
+preflight_checks:
+  - "Confirm LUT path and color space."
+  - "Confirm clip scope or timeline scope."
+  - "Recommend duplicating timeline or preserving stills before broad changes."
+execution_modes:
+  hybrid:
+    status: "recommended"
+    notes: "Applying looks requires visual review."
+  ui_guidance:
+    status: "available"
+    notes: "Guide through Color page with user confirmation."
+  scripting_api:
+    status: "use_only_when_api_confirmed"
+    notes: "Do not invent Color page node API methods."
+safety:
+  confirmation_required_before:
+    - "applying_lut_to_many_clips"
+    - "changing_color_management"
+generic_steps:
+  - "Confirm color pipeline and LUT intent."
+  - "Apply to a test clip or duplicated timeline first."
+  - "Ask user to visually approve before broad application."
+verification:
+  - "LUT is visible on intended clips only."
+  - "Image is not clipped or transformed in the wrong color space."
+rollback:
+  - "Disable or remove LUT node, or return to duplicated timeline."

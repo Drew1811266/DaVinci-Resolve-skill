@@ -1,0 +1,76 @@
+name: "DaVinci Resolve skill"
+slug: "davinci-resolve"
+version: "0.1.0"
+description: "A platform-neutral AI agent skill for safely planning, guiding, scripting, and verifying DaVinci Resolve workflows."
+software:
+  name: "DaVinci Resolve"
+  vendor: "Blackmagic Design"
+  domains:
+    - video_editing
+    - color_grading
+    - visual_effects
+    - motion_graphics
+    - audio_post
+    - media_management
+    - delivery_rendering
+supported_platforms:
+  - macOS
+  - Windows
+  - Linux
+supported_interaction_modes:
+  - instructional_guidance
+  - scripting_api
+  - hybrid_script_and_ui
+  - ui_automation_when_available
+  - troubleshooting
+required_environment_checks:
+  - resolve_version
+  - free_or_studio_edition
+  - operating_system
+  - project_open_state
+  - project_backup_state
+  - target_timeline
+  - source_media_paths
+  - output_path
+  - overwrite_permission
+risk_policy:
+  default_risk_level: "medium"
+  always_confirm_before:
+    - deleting_media
+    - deleting_bins
+    - deleting_timelines
+    - overwriting_project_settings
+    - changing_timeline_frame_rate
+    - changing_project_color_management
+    - relinking_media
+    - rendering_over_existing_files
+    - batch_modifying_clips
+    - modifying_collaborative_projects
+  never_do:
+    - overwrite_source_camera_media_without_explicit_user_instruction
+    - invent_unverified_api_methods
+    - claim_version_specific_features_without_source
+    - assume_ui_automation_capability
+knowledge_source_priority:
+  - user_provided_context
+  - installed_resolve_documentation
+  - official_blackmagic_design_documentation
+  - official_release_notes
+  - official_training_materials
+  - labeled_community_references
+versioning:
+  knowledge_items_must_track:
+    - applies_to_version
+    - edition_requirement
+    - operating_system_notes
+    - source_reference
+    - last_verified_date
+output_contract:
+  user_task_response_sections:
+    - task_interpretation
+    - assumptions
+    - execution_mode
+    - preflight_checklist
+    - steps
+    - verification
+    - risks_and_rollback

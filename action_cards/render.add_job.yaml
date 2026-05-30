@@ -1,0 +1,57 @@
+id: "render.add_job"
+name: "Add render job"
+domain: "delivery_rendering"
+resolve_page: "Deliver"
+risk_level: "medium"
+user_intents:
+  - "export video"
+  - "render timeline"
+  - "add render job"
+  - "导出视频"
+  - "渲染时间线"
+required_inputs:
+  - timeline_name
+  - output_directory
+  - filename
+  - format
+  - codec
+  - resolution
+  - frame_rate
+optional_inputs:
+  - audio_codec
+  - subtitle_mode
+  - render_preset
+  - color_space_tag
+  - in_out_range
+preflight_checks:
+  - "Confirm correct project and timeline."
+  - "Confirm output directory exists or can be created."
+  - "Confirm overwrite policy."
+  - "Confirm codec availability for edition and OS."
+execution_modes:
+  scripting_api:
+    status: "preferred_when_api_confirmed"
+    notes: "Use installed Developer documentation for render settings and queue methods."
+  ui_guidance:
+    status: "available"
+    notes: "Guide user through Deliver page when scripting is unverified."
+  hybrid:
+    status: "recommended_for_complex_exports"
+    notes: "Prepare job, then user visually confirms settings."
+safety:
+  confirmation_required_before:
+    - "overwriting_existing_output"
+    - "starting_long_render"
+    - "changing_project_or_timeline_settings"
+generic_steps:
+  - "Identify target timeline."
+  - "Collect render settings."
+  - "Check output path and overwrite risk."
+  - "Create or configure render job."
+  - "Add job to render queue."
+verification:
+  - "Render job appears in the queue."
+  - "Settings match requested format, codec, resolution, frame rate, audio, and subtitles."
+rollback:
+  - "Remove incorrect render job from queue."
+  - "Delete incorrect output only after confirmation."

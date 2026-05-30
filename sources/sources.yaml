@@ -1,0 +1,53 @@
+sources:
+  - id: "installed-developer-docs"
+    title: "DaVinci Resolve Developer Documentation"
+    publisher: "Blackmagic Design"
+    source_type: "installed_developer_doc"
+    trust_level: "installed_developer_doc"
+    applicable_domains:
+      - scripting
+      - python_api
+      - lua_api
+      - render_queue
+      - project_manager
+    version: "user_installed_version"
+    local_path: "Help > Documentation > Developer"
+    last_verified: "user_or_agent_to_fill"
+    notes: "Use for exact API objects, method names, return values, and script locations."
+  - id: "bmd-product-overview"
+    title: "DaVinci Resolve Product Overview"
+    publisher: "Blackmagic Design"
+    source_type: "official_product_page"
+    trust_level: "primary_official"
+    applicable_domains:
+      - overview
+      - editions
+      - pages
+    version: "current_web"
+    last_verified: "YYYY-MM-DD"
+    notes: "Use for high-level capabilities only; do not infer exact API or menu behavior."
+  - id: "bmd-training-resolve"
+    title: "DaVinci Resolve Training"
+    publisher: "Blackmagic Design"
+    source_type: "official_training"
+    trust_level: "official_training"
+    applicable_domains:
+      - editing
+      - color
+      - fusion
+      - fairlight
+      - beginner_workflows
+    version: "current_web"
+    last_verified: "YYYY-MM-DD"
+    notes: "Use for workflow grounding, not unverified automation details."
+  - id: "community-reference-placeholder"
+    title: "Community Reference Placeholder"
+    publisher: "community"
+    source_type: "community_reference"
+    trust_level: "community_reference"
+    applicable_domains:
+      - troubleshooting
+      - examples
+    version: "varies"
+    last_verified: "YYYY-MM-DD"
+    notes: "Community material must be labeled and must not override official sources."

@@ -1,0 +1,45 @@
+id: "subtitles.create_or_import"
+name: "Create or import subtitles"
+domain: "subtitles"
+resolve_page: "Edit"
+risk_level: "medium"
+user_intents:
+  - "import SRT"
+  - "create subtitles"
+  - "add captions"
+  - "导入字幕"
+required_inputs:
+  - timeline_name
+  - subtitle_source_or_text
+optional_inputs:
+  - language
+  - subtitle_track_name
+  - burn_in_or_embedded
+  - export_format
+preflight_checks:
+  - "Confirm target timeline and subtitle source."
+  - "Confirm whether subtitles should be burned in, embedded, or exported separately."
+  - "Confirm version support for requested subtitle behavior."
+execution_modes:
+  scripting_api:
+    status: "use_only_when_api_confirmed"
+    notes: "Do not invent subtitle API methods."
+  ui_guidance:
+    status: "available"
+    notes: "Guide UI import or manual creation."
+  hybrid:
+    status: "recommended"
+    notes: "Prepare subtitle file, then user imports or confirms timing visually."
+safety:
+  confirmation_required_before:
+    - "replacing_existing_subtitle_tracks"
+    - "burning_subtitles_into_final_render"
+generic_steps:
+  - "Validate subtitle source format."
+  - "Place subtitles on target timeline."
+  - "Confirm timing, language, and render behavior."
+verification:
+  - "Subtitle track exists and timing aligns with dialogue."
+  - "Render/export behavior matches requested subtitle mode."
+rollback:
+  - "Remove or disable added subtitle track after confirmation."

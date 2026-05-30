@@ -1,0 +1,4 @@
+interface:
+  display_name: "DaVinci Resolve"
+  short_description: "Safe Resolve workflow planning"
+  default_prompt: "Use $davinci-resolve to plan a safe DaVinci Resolve import, edit, render, or automation task."

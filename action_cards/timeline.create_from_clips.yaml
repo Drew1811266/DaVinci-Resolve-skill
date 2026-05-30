@@ -1,0 +1,46 @@
+id: "timeline.create_from_clips"
+name: "Create timeline from clips"
+domain: "editing"
+resolve_page: "Edit"
+risk_level: "medium"
+user_intents:
+  - "create timeline"
+  - "make timeline from clips"
+  - "用素材创建时间线"
+required_inputs:
+  - target_project
+  - clip_selection
+  - timeline_name
+optional_inputs:
+  - sort_order
+  - timeline_resolution
+  - timeline_frame_rate
+  - start_timecode
+preflight_checks:
+  - "Confirm correct project and Media Pool selection."
+  - "Confirm clip ordering."
+  - "Confirm frame rate before timeline creation; changing later may be unsafe."
+execution_modes:
+  scripting_api:
+    status: "preferred_when_api_confirmed"
+    notes: "Confirm timeline creation API and frame-rate behavior."
+  ui_guidance:
+    status: "available"
+    notes: "Guide user through Media Pool or Edit page timeline creation."
+  hybrid:
+    status: "recommended"
+    notes: "Script structure, then user reviews edit order."
+safety:
+  confirmation_required_before:
+    - "changing_timeline_frame_rate"
+    - "replacing_existing_timeline"
+generic_steps:
+  - "Resolve clip list and order."
+  - "Check timeline name conflict."
+  - "Create timeline with confirmed settings."
+  - "Set active timeline if requested."
+verification:
+  - "Timeline exists with expected name."
+  - "Clip count, order, duration, frame rate, and resolution match request."
+rollback:
+  - "Delete incorrect timeline only after confirmation."

@@ -1,0 +1,48 @@
+id: "render.batch_export"
+name: "Batch export timelines"
+domain: "delivery_rendering"
+resolve_page: "Deliver"
+risk_level: "high"
+user_intents:
+  - "batch export"
+  - "render all timelines"
+  - "批量导出"
+required_inputs:
+  - timeline_list
+  - output_directory
+  - naming_pattern
+  - format
+  - codec
+optional_inputs:
+  - render_preset
+  - subtitle_mode
+  - dry_run
+preflight_checks:
+  - "Confirm all target timelines."
+  - "Confirm output naming and collision behavior."
+  - "Confirm render duration and machine usage."
+execution_modes:
+  scripting_api:
+    status: "preferred_when_api_confirmed"
+    notes: "Use dry run first; confirm batch render API."
+  hybrid:
+    status: "recommended"
+    notes: "Script queue setup, user confirms before starting render."
+  ui_guidance:
+    status: "available"
+    notes: "Use when scripting is unverified."
+safety:
+  confirmation_required_before:
+    - "starting_batch_render"
+    - "overwriting_existing_outputs"
+generic_steps:
+  - "Dry-run timeline list and output paths."
+  - "Ask for confirmation if any output exists."
+  - "Add jobs to render queue."
+  - "Start rendering only after confirmation."
+verification:
+  - "Every requested timeline has one queued or rendered output."
+  - "Each output exists and matches expected settings."
+rollback:
+  - "Remove queued jobs."
+  - "Delete incorrect outputs only after confirmation."

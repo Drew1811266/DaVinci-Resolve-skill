@@ -1,0 +1,42 @@
+id: "project.create_project"
+name: "Create project"
+domain: "project_management"
+resolve_page: "Project Manager"
+risk_level: "medium"
+user_intents:
+  - "create project"
+  - "new Resolve project"
+  - "创建项目"
+required_inputs:
+  - project_name
+optional_inputs:
+  - project_library
+  - project_settings
+  - backup_location
+preflight_checks:
+  - "Confirm project name and project library."
+  - "Check whether a project with the same name already exists."
+  - "Confirm initial frame rate, resolution, and color management if requested."
+execution_modes:
+  scripting_api:
+    status: "preferred_when_api_confirmed"
+    notes: "Confirm project creation API in installed Developer documentation."
+  ui_guidance:
+    status: "available"
+    notes: "Guide user through Project Manager."
+  hybrid:
+    status: "available"
+    notes: "Create project, then user confirms project settings visually."
+safety:
+  confirmation_required_before:
+    - "overwriting_or_replacing_existing_project"
+    - "changing_default_project_settings"
+generic_steps:
+  - "Check for existing project name conflict."
+  - "Create or guide creation of the project."
+  - "Apply only confirmed initial settings."
+verification:
+  - "New project opens with expected name."
+  - "Project settings match requested values."
+rollback:
+  - "Close or delete the new project only after confirmation."

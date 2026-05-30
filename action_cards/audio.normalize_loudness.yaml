@@ -1,0 +1,44 @@
+id: "audio.normalize_loudness"
+name: "Normalize loudness"
+domain: "audio_post"
+resolve_page: "Fairlight"
+risk_level: "high"
+user_intents:
+  - "normalize loudness"
+  - "make audio broadcast safe"
+  - "响度标准化"
+required_inputs:
+  - timeline_name
+  - loudness_target
+optional_inputs:
+  - track_list
+  - delivery_standard
+  - true_peak_limit
+preflight_checks:
+  - "Confirm target loudness standard and tracks."
+  - "Confirm whether changes are clip gain, track processing, bus processing, or render settings."
+  - "Recommend duplicating timeline before broad audio changes."
+execution_modes:
+  ui_guidance:
+    status: "recommended"
+    notes: "Audio decisions should be reviewed in Fairlight."
+  scripting_api:
+    status: "use_only_when_api_confirmed"
+    notes: "Do not invent Fairlight or loudness API methods."
+  hybrid:
+    status: "available"
+    notes: "Script analysis or setup only when supported, then user reviews."
+safety:
+  confirmation_required_before:
+    - "batch_modifying_audio_levels"
+    - "changing_bus_or_track_processing"
+generic_steps:
+  - "Duplicate timeline or preserve backup."
+  - "Measure current loudness using confirmed tools."
+  - "Apply confirmed normalization workflow."
+  - "Re-measure loudness."
+verification:
+  - "Measured integrated loudness and true peak match target."
+  - "Audio remains intelligible and not clipped."
+rollback:
+  - "Return to duplicated backup timeline or undo processing."

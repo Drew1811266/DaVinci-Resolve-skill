@@ -1,0 +1,48 @@
+id: "project.backup_project"
+name: "Back up project before risky work"
+domain: "project_management"
+resolve_page: "Project Manager"
+risk_level: "low"
+user_intents:
+  - "backup project"
+  - "archive project"
+  - "make a copy before changes"
+  - "备份项目"
+required_inputs:
+  - project_name
+optional_inputs:
+  - backup_destination
+  - include_media
+  - include_cache
+  - archive_format
+preflight_checks:
+  - "Confirm the correct project is open."
+  - "Confirm whether the user wants a project-only backup or full archive with media."
+  - "Confirm backup destination and free disk space if media is included."
+execution_modes:
+  ui_guidance:
+    status: "available"
+    notes: "Use when backup or archive menus must be selected by the user."
+  scripting_api:
+    status: "use_only_when_api_confirmed"
+    notes: "Confirm backup/export/archive API in installed Developer documentation."
+  hybrid:
+    status: "available"
+    notes: "Use script to inspect project state, then user confirms backup in UI."
+safety:
+  confirmation_required_before:
+    - "overwriting_existing_backup"
+    - "excluding_media_from_archive"
+  never_do:
+    - "delete_existing_backups_without_confirmation"
+generic_steps:
+  - "Identify active project."
+  - "Choose backup or archive scope."
+  - "Validate destination and overwrite risk."
+  - "Create backup or guide user through export/archive."
+verification:
+  - "Backup or archive file exists at expected destination."
+  - "File timestamp matches the operation."
+  - "Backup can be opened or restored according to the selected method."
+rollback:
+  - "Use the backup/archive to restore project state if later changes are incorrect."

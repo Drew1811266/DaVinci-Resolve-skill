@@ -1,0 +1,44 @@
+id: "fusion.create_title"
+name: "Create Fusion title"
+domain: "visual_effects"
+resolve_page: "Fusion"
+risk_level: "medium"
+user_intents:
+  - "create title"
+  - "Fusion title"
+  - "做标题动画"
+required_inputs:
+  - timeline_name
+  - title_text
+optional_inputs:
+  - duration
+  - style_reference
+  - font
+  - animation_notes
+preflight_checks:
+  - "Confirm target timeline and insertion point."
+  - "Confirm visual style and duration."
+  - "Confirm whether generated design needs manual review."
+execution_modes:
+  hybrid:
+    status: "recommended"
+    notes: "Create structure, then user reviews animation and design."
+  ui_guidance:
+    status: "available"
+    notes: "Guide user through Fusion or title tools."
+  scripting_api:
+    status: "use_only_when_api_confirmed"
+    notes: "Confirm Fusion composition API before generating code."
+safety:
+  confirmation_required_before:
+    - "replacing_existing_title_or_comp"
+generic_steps:
+  - "Choose insertion point and title duration."
+  - "Create title or Fusion composition."
+  - "Set text and basic styling."
+  - "Ask user to visually approve motion and layout."
+verification:
+  - "Title appears at expected time with expected text."
+  - "Animation and styling match user-approved direction."
+rollback:
+  - "Disable or remove created title after confirmation."

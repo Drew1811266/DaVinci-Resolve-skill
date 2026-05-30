@@ -1,0 +1,38 @@
+id: "timeline.export_xml"
+name: "Export timeline XML"
+domain: "interchange"
+resolve_page: "Edit"
+risk_level: "medium"
+user_intents:
+  - "export XML"
+  - "export timeline"
+  - "导出 XML"
+required_inputs:
+  - timeline_name
+  - output_path
+optional_inputs:
+  - interchange_format
+  - include_media_references
+preflight_checks:
+  - "Confirm target timeline."
+  - "Confirm output path and overwrite permission."
+  - "Confirm desired interchange format and target application."
+execution_modes:
+  scripting_api:
+    status: "use_when_api_confirmed"
+    notes: "Confirm export API and supported formats."
+  ui_guidance:
+    status: "available"
+    notes: "Guide user through timeline export menus only when menu names are verified."
+safety:
+  confirmation_required_before:
+    - "overwriting_existing_xml"
+generic_steps:
+  - "Identify target timeline."
+  - "Validate output directory."
+  - "Export the timeline interchange file."
+verification:
+  - "Export file exists at expected path."
+  - "File timestamp matches operation."
+rollback:
+  - "Keep previous export unless user confirms replacement."

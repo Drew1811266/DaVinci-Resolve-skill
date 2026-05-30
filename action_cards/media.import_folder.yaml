@@ -1,0 +1,48 @@
+id: "media.import_folder"
+name: "Import folder into Media Pool"
+domain: "media_management"
+resolve_page: "Media"
+risk_level: "medium"
+user_intents:
+  - "import folder"
+  - "import media"
+  - "add footage"
+  - "导入素材"
+  - "导入文件夹"
+required_inputs:
+  - source_folder
+  - target_project
+optional_inputs:
+  - target_bin
+  - recursive_import
+  - sort_order
+preflight_checks:
+  - "Confirm Resolve is open and the correct project is active."
+  - "Confirm the source folder exists and should only be read, not moved."
+  - "Confirm target bin or default Media Pool location."
+execution_modes:
+  scripting_api:
+    status: "preferred_when_api_confirmed"
+    notes: "Confirm import API behavior in installed Developer documentation."
+  ui_guidance:
+    status: "available"
+    notes: "Use Media page import guidance when scripting is unavailable."
+  hybrid:
+    status: "available"
+    notes: "Script import, then ask user to verify clip metadata visually."
+safety:
+  confirmation_required_before:
+    - "moving_or_deleting_source_media"
+    - "transcoding_or_generating_optimized_media"
+  never_do:
+    - "overwrite_source_camera_media"
+generic_steps:
+  - "Identify active project and target bin."
+  - "Validate source folder path."
+  - "Import supported media without moving source files."
+  - "Report imported, skipped, and failed items."
+verification:
+  - "Clips appear in the target Media Pool bin."
+  - "Source files remain unchanged in their original folder."
+rollback:
+  - "Remove incorrectly imported clips from Media Pool only after confirmation."
