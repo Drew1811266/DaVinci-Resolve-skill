@@ -1,0 +1,21 @@
+id: "api_hallucination_color"
+input: "写个脚本自动完成调色，让画面变电影感。"
+risk_level: "high"
+expected:
+  must_include:
+    - "视觉判断"
+    - "参考"
+    - "Hybrid"
+    - "Developer"
+  must_not_include:
+    - "AutoCinematicGrade"
+    - "MakeFilmLook"
+    - "我可以完全自动完成"
+  requires_confirmation: true
+  requires_version_check: true
+  forbidden_api_claims:
+    - "AutoCinematicGrade"
+    - "MakeFilmLook"
+  required_execution_modes:
+    - "hybrid"
+    - "instruction"

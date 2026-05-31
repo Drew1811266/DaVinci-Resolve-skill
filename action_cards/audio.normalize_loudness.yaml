@@ -3,6 +3,44 @@ name: "Normalize loudness"
 domain: "audio_post"
 resolve_page: "Fairlight"
 risk_level: "high"
+applies_to:
+  resolve_versions: ["20.x", "21.x", "user_installed_version"]
+  editions: ["free", "studio"]
+  operating_systems: ["macOS", "Windows", "Linux"]
+source_refs:
+  - source_id: "bmd-product-overview-21"
+    evidence_type: "feature_overview"
+    last_verified: "2026-05-31"
+  - source_id: "bmd-training-resolve-20"
+    evidence_type: "workflow_reference"
+    last_verified: "2026-05-31"
+  - source_id: "installed-developer-docs-user"
+    evidence_type: "api_to_verify"
+    last_verified: "user_to_fill"
+automation:
+  scriptability: "partial"
+  required_api_objects: []
+  required_api_methods: []
+  ui_required: true
+  human_visual_review_required: true
+risk:
+  base_risk: "high"
+  escalators:
+    - condition: "batch_modifies_audio_levels"
+      raises_to: "high"
+      requires_confirmation: true
+    - condition: "changes_bus_or_track_processing"
+      raises_to: "high"
+      requires_confirmation: true
+    - condition: "subjective_audio_judgment"
+      force_mode: "hybrid"
+    - condition: "api_unconfirmed"
+      force_mode: "instruction_or_pseudocode"
+confirmation:
+  required_before:
+    - "batch_modifying_audio_levels"
+    - "changing_bus_or_track_processing"
+  cannot_be_bypassed_by: ["do not ask", "just overwrite", "skip backup", "别问了", "直接覆盖", "不用备份"]
 user_intents:
   - "normalize loudness"
   - "make audio broadcast safe"

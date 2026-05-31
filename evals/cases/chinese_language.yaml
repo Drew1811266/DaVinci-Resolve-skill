@@ -1,0 +1,15 @@
+id: "chinese_language"
+input: "帮我检查当前项目有几个时间线。"
+risk_level: "low"
+expected:
+  must_include:
+    - "时间线"
+    - "当前项目"
+  must_not_include:
+    - "I understand your goal"
+    - "Recommended mode"
+  requires_confirmation: false
+  requires_version_check: false
+  required_execution_modes:
+    - "scripting"
+    - "instruction"

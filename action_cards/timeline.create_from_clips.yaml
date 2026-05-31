@@ -3,6 +3,42 @@ name: "Create timeline from clips"
 domain: "editing"
 resolve_page: "Edit"
 risk_level: "medium"
+applies_to:
+  resolve_versions: ["20.x", "21.x", "user_installed_version"]
+  editions: ["free", "studio"]
+  operating_systems: ["macOS", "Windows", "Linux"]
+source_refs:
+  - source_id: "bmd-product-overview-21"
+    evidence_type: "feature_overview"
+    last_verified: "2026-05-31"
+  - source_id: "installed-developer-docs-user"
+    evidence_type: "api_to_verify"
+    last_verified: "user_to_fill"
+automation:
+  scriptability: "confirmed"
+  required_api_objects: ["Project", "MediaPool"]
+  required_api_methods: ["GetMediaPool", "CreateTimelineFromClips", "CreateEmptyTimeline", "AppendToTimeline"]
+  ui_required: false
+  human_visual_review_required: true
+risk:
+  base_risk: "medium"
+  escalators:
+    - condition: "changes_timeline_frame_rate"
+      raises_to: "high"
+      requires_confirmation: true
+    - condition: "replaces_existing_timeline"
+      raises_to: "high"
+      requires_confirmation: true
+    - condition: "batch_scope"
+      raises_to: "high"
+      requires_dry_run: true
+    - condition: "creative_edit_order_unclear"
+      force_mode: "hybrid"
+confirmation:
+  required_before:
+    - "changing_timeline_frame_rate"
+    - "replacing_existing_timeline"
+  cannot_be_bypassed_by: ["do not ask", "just overwrite", "skip backup", "别问了", "直接覆盖", "不用备份"]
 user_intents:
   - "create timeline"
   - "make timeline from clips"

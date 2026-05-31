@@ -1,0 +1,181 @@
+capabilities:
+  - id: "resolve.connect"
+    status: "confirmed"
+    source_id: "installed-developer-docs-user"
+    objects:
+      - "DaVinciResolveScript"
+      - "Resolve"
+    methods:
+      - "scriptapp"
+    risk_level: "low"
+    allowed_use:
+      - "connection_preflight"
+      - "environment_check"
+    notes: "Confirmed from installed Scripting README. This only connects to a running Resolve instance."
+    last_verified: "2026-05-31"
+
+  - id: "resolve.version_read"
+    status: "confirmed"
+    source_id: "installed-developer-docs-user"
+    objects:
+      - "Resolve"
+    methods:
+      - "GetProductName"
+      - "GetVersion"
+      - "GetVersionString"
+      - "GetCurrentPage"
+    risk_level: "low"
+    allowed_use:
+      - "read_only_inspection"
+    notes: "Read-only Resolve application metadata."
+    last_verified: "2026-05-31"
+
+  - id: "project.get_current"
+    status: "confirmed"
+    source_id: "installed-developer-docs-user"
+    objects:
+      - "Resolve"
+      - "ProjectManager"
+      - "Project"
+    methods:
+      - "GetProjectManager"
+      - "GetCurrentProject"
+      - "GetName"
+    risk_level: "low"
+    allowed_use:
+      - "read_only_inspection"
+    notes: "Read current project identity without mutation."
+    last_verified: "2026-05-31"
+
+  - id: "project.list_timelines"
+    status: "confirmed"
+    source_id: "installed-developer-docs-user"
+    objects:
+      - "Project"
+      - "Timeline"
+    methods:
+      - "GetTimelineCount"
+      - "GetTimelineByIndex"
+      - "GetCurrentTimeline"
+      - "GetName"
+      - "GetStartFrame"
+      - "GetEndFrame"
+      - "GetTrackCount"
+    risk_level: "low"
+    allowed_use:
+      - "read_only_inspection"
+    notes: "Read timeline inventory and basic structure. Does not edit tracks or clips."
+    last_verified: "2026-05-31"
+
+  - id: "media_pool.inspect"
+    status: "confirmed"
+    source_id: "installed-developer-docs-user"
+    objects:
+      - "Project"
+      - "MediaPool"
+      - "Folder"
+      - "MediaPoolItem"
+    methods:
+      - "GetMediaPool"
+      - "GetRootFolder"
+      - "GetCurrentFolder"
+      - "GetClipList"
+      - "GetSubFolderList"
+      - "GetName"
+    risk_level: "low"
+    allowed_use:
+      - "read_only_inspection"
+    notes: "Read Media Pool structure. Does not import, move, delete, relink, or modify media."
+    last_verified: "2026-05-31"
+
+  - id: "media_pool.import_media"
+    status: "confirmed"
+    source_id: "installed-developer-docs-user"
+    objects:
+      - "MediaPool"
+    methods:
+      - "ImportMedia"
+    risk_level: "medium"
+    allowed_use:
+      - "script_after_confirmation"
+      - "dry_run_before_execution"
+    notes: "API exists, but execution must still validate paths, target folder, image sequence behavior, and source media protection."
+    last_verified: "2026-05-31"
+
+  - id: "timeline.create_from_clips"
+    status: "confirmed"
+    source_id: "installed-developer-docs-user"
+    objects:
+      - "MediaPool"
+      - "Timeline"
+    methods:
+      - "CreateTimelineFromClips"
+      - "CreateEmptyTimeline"
+      - "AppendToTimeline"
+    risk_level: "medium"
+    allowed_use:
+      - "script_after_confirmation"
+      - "dry_run_before_execution"
+    notes: "API exists, but clip selection, ordering, naming conflicts, and frame-rate assumptions must be handled conservatively."
+    last_verified: "2026-05-31"
+
+  - id: "render.queue_inspect"
+    status: "confirmed"
+    source_id: "installed-developer-docs-user"
+    objects:
+      - "Project"
+    methods:
+      - "GetRenderJobList"
+      - "GetRenderJobStatus"
+      - "IsRenderingInProgress"
+    risk_level: "low"
+    allowed_use:
+      - "read_only_inspection"
+    notes: "Read render queue and status only."
+    last_verified: "2026-05-31"
+
+  - id: "render.add_job"
+    status: "confirmed"
+    source_id: "installed-developer-docs-user"
+    objects:
+      - "Project"
+    methods:
+      - "SetRenderSettings"
+      - "AddRenderJob"
+      - "GetRenderFormats"
+      - "GetRenderCodecs"
+      - "GetCurrentRenderFormatAndCodec"
+      - "SetCurrentRenderFormatAndCodec"
+    risk_level: "medium"
+    allowed_use:
+      - "script_after_confirmation"
+      - "dry_run_before_execution"
+    notes: "Adding a job and starting rendering are separate. Output collisions and codec support must be checked before mutation."
+    last_verified: "2026-05-31"
+
+  - id: "render.start"
+    status: "confirmed"
+    source_id: "installed-developer-docs-user"
+    objects:
+      - "Project"
+    methods:
+      - "StartRendering"
+      - "StopRendering"
+    risk_level: "high"
+    allowed_use:
+      - "explicit_confirmation_only"
+    notes: "Starting renders can consume resources and overwrite outputs if settings allow it. Never start automatically without confirmation."
+    last_verified: "2026-05-31"
+
+  - id: "color.node_graph_modify"
+    status: "partial"
+    source_id: "installed-developer-docs-user"
+    objects:
+      - "TimelineItem"
+    methods:
+      - "ExportLUT"
+    risk_level: "high"
+    allowed_use:
+      - "hybrid_with_visual_review"
+    notes: "Do not claim full automatic color grading. Node graph and look decisions require visual review and version-specific API checks."
+    last_verified: "2026-05-31"

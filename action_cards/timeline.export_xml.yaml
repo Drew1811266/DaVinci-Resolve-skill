@@ -3,6 +3,35 @@ name: "Export timeline XML"
 domain: "interchange"
 resolve_page: "Edit"
 risk_level: "medium"
+applies_to:
+  resolve_versions: ["20.x", "21.x", "user_installed_version"]
+  editions: ["free", "studio"]
+  operating_systems: ["macOS", "Windows", "Linux"]
+source_refs:
+  - source_id: "bmd-product-overview-21"
+    evidence_type: "feature_overview"
+    last_verified: "2026-05-31"
+  - source_id: "installed-developer-docs-user"
+    evidence_type: "api_to_verify"
+    last_verified: "user_to_fill"
+automation:
+  scriptability: "confirmed"
+  required_api_objects: ["Timeline"]
+  required_api_methods: ["Export"]
+  ui_required: false
+  human_visual_review_required: false
+risk:
+  base_risk: "medium"
+  escalators:
+    - condition: "overwrites_existing_files"
+      raises_to: "high"
+      requires_confirmation: true
+    - condition: "export_format_or_subtype_unclear"
+      force_mode: "instruction_or_pseudocode"
+confirmation:
+  required_before:
+    - "overwriting_existing_xml"
+  cannot_be_bypassed_by: ["do not ask", "just overwrite", "skip backup", "别问了", "直接覆盖", "不用备份"]
 user_intents:
   - "export XML"
   - "export timeline"

@@ -3,6 +3,40 @@ name: "Create project"
 domain: "project_management"
 resolve_page: "Project Manager"
 risk_level: "medium"
+applies_to:
+  resolve_versions: ["20.x", "21.x", "user_installed_version"]
+  editions: ["free", "studio"]
+  operating_systems: ["macOS", "Windows", "Linux"]
+source_refs:
+  - source_id: "bmd-product-overview-21"
+    evidence_type: "feature_overview"
+    last_verified: "2026-05-31"
+  - source_id: "installed-developer-docs-user"
+    evidence_type: "api_to_verify"
+    last_verified: "user_to_fill"
+automation:
+  scriptability: "confirmed"
+  required_api_objects: ["Resolve", "ProjectManager"]
+  required_api_methods: ["GetProjectManager", "CreateProject"]
+  ui_required: false
+  human_visual_review_required: false
+risk:
+  base_risk: "medium"
+  escalators:
+    - condition: "existing_project_name_conflict"
+      raises_to: "high"
+      requires_confirmation: true
+    - condition: "changes_default_project_settings"
+      raises_to: "high"
+      requires_confirmation: true
+    - condition: "collaborative_or_cloud_project"
+      raises_to: "high"
+      requires_confirmation: true
+confirmation:
+  required_before:
+    - "overwriting_or_replacing_existing_project"
+    - "changing_default_project_settings"
+  cannot_be_bypassed_by: ["do not ask", "just overwrite", "skip backup", "别问了", "直接覆盖", "不用备份"]
 user_intents:
   - "create project"
   - "new Resolve project"

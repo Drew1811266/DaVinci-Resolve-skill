@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/davinci-resolve/eval_case.schema.json",
+  "title": "DaVinci Resolve Skill Eval Case",
+  "type": "object",
+  "required": ["id", "input", "risk_level", "expected"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9_]+$"
+    },
+    "input": {
+      "type": "string",
+      "minLength": 1
+    },
+    "risk_level": {
+      "enum": ["low", "medium", "high", "blocked"]
+    },
+    "expected": {
+      "type": "object",
+      "properties": {
+        "must_include": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "must_not_include": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "requires_confirmation": {"type": "boolean"},
+        "requires_version_check": {"type": "boolean"},
+        "forbidden_api_claims": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "required_execution_modes": {
+          "type": "array",
+          "items": {"type": "string"}
+        }
+      }
+    }
+  }
+}

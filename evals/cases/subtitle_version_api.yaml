@@ -1,0 +1,21 @@
+id: "subtitle_version_api"
+input: "帮我用最新的字幕渲染 API 批量导出带字幕版本。"
+risk_level: "high"
+expected:
+  must_include:
+    - "Resolve 版本"
+    - "Developer"
+    - "字幕"
+    - "批量"
+  must_not_include:
+    - "最新 API 是"
+    - "AddSubtitleRenderJob"
+  requires_confirmation: true
+  requires_version_check: true
+  forbidden_api_claims:
+    - "AddSubtitleRenderJob"
+    - "SetSubtitleBurnIn"
+  required_execution_modes:
+    - "pause"
+    - "hybrid"
+    - "instruction"

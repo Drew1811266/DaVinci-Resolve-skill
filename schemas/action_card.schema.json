@@ -1,0 +1,136 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/davinci-resolve/action_card.schema.json",
+  "title": "DaVinci Resolve Action Card",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "domain",
+    "resolve_page",
+    "risk_level",
+    "applies_to",
+    "source_refs",
+    "automation",
+    "risk",
+    "confirmation",
+    "user_intents",
+    "required_inputs",
+    "optional_inputs",
+    "preflight_checks",
+    "execution_modes",
+    "safety",
+    "generic_steps",
+    "verification",
+    "rollback"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(\\.[a-z0-9_]+)+$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "domain": {
+      "type": "string",
+      "minLength": 1
+    },
+    "resolve_page": {
+      "type": "string",
+      "minLength": 1
+    },
+    "risk_level": {
+      "enum": ["low", "medium", "high", "blocked"]
+    },
+    "applies_to": {
+      "type": "object",
+      "required": ["resolve_versions", "editions", "operating_systems"],
+      "properties": {
+        "resolve_versions": {
+          "type": "array",
+          "items": {"type": "string"},
+          "minItems": 1
+        },
+        "editions": {
+          "type": "array",
+          "items": {"type": "string"},
+          "minItems": 1
+        },
+        "operating_systems": {
+          "type": "array",
+          "items": {"type": "string"},
+          "minItems": 1
+        }
+      }
+    },
+    "source_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["source_id", "evidence_type", "last_verified"],
+        "properties": {
+          "source_id": {"type": "string"},
+          "evidence_type": {"type": "string"},
+          "last_verified": {"type": "string"}
+        }
+      },
+      "minItems": 1
+    },
+    "automation": {
+      "type": "object",
+      "required": ["scriptability", "required_api_objects", "required_api_methods", "ui_required", "human_visual_review_required"],
+      "properties": {
+        "scriptability": {
+          "enum": ["confirmed", "partial", "to_verify", "unsupported"]
+        },
+        "required_api_objects": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "required_api_methods": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "ui_required": {"type": "boolean"},
+        "human_visual_review_required": {"type": "boolean"}
+      }
+    },
+    "risk": {
+      "type": "object",
+      "required": ["base_risk", "escalators"],
+      "properties": {
+        "base_risk": {"enum": ["low", "medium", "high", "blocked"]},
+        "escalators": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["condition"],
+            "properties": {
+              "condition": {"type": "string"},
+              "raises_to": {"type": "string"},
+              "requires_confirmation": {"type": "boolean"},
+              "requires_dry_run": {"type": "boolean"},
+              "force_mode": {"type": "string"}
+            }
+          }
+        }
+      }
+    },
+    "confirmation": {
+      "type": "object",
+      "required": ["required_before", "cannot_be_bypassed_by"],
+      "properties": {
+        "required_before": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "cannot_be_bypassed_by": {
+          "type": "array",
+          "items": {"type": "string"}
+        }
+      }
+    }
+  }
+}

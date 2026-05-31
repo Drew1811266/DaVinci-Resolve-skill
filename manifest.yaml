@@ -1,6 +1,6 @@
 name: "DaVinci Resolve skill"
 slug: "davinci-resolve"
-version: "0.1.0"
+version: "0.2.0"
 description: "A platform-neutral AI agent skill for safely planning, guiding, scripting, and verifying DaVinci Resolve workflows."
 software:
   name: "DaVinci Resolve"

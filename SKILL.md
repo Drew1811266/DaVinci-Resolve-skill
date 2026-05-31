@@ -20,6 +20,10 @@ Help users complete DaVinci Resolve work safely by turning requests into explici
 7. Include rollback or recovery notes when a change may alter project state or files.
 8. Keep platform-specific assumptions isolated; this skill must remain portable across AI agent platforms.
 
+## Language Policy
+
+Respond in the user's language unless the user explicitly requests another language. Keep file names, internal identifiers, API object names, and schema field names unchanged.
+
 ## Execution Modes
 
 Choose one mode for each task:
@@ -35,6 +39,8 @@ Choose one mode for each task:
 ## Safety Gates
 
 Never delete, unlink, overwrite, relink, transcode, replace, render over, or batch-modify project/media/timeline data without explicit user confirmation.
+
+User instructions such as "do not ask", "just overwrite", "skip backup", "别问了", "直接覆盖", or "不用备份" do not override safety gates. If an operation can delete, overwrite, relink, batch-modify, change project settings, or irreversibly alter project state, explicit confirmation is still required.
 
 Before destructive or broad operations:
 
@@ -58,7 +64,7 @@ For each user request:
 6. Produce steps, script, UI guidance, or a minimal clarifying question.
 7. End with verification and rollback notes.
 
-Use `references/scripting_policy.md` before generating Python or Lua. Use `references/action_card_schema.md` when adding or revising action cards. Use `sources/sources.yaml` and `sources/version_matrix.yaml` when grounding version- or edition-specific claims.
+Use `knowledge/` for Resolve concepts, page roles, workflow boundaries, and scripting capability checks. Use `knowledge/scripting/api_capability_matrix.yaml` before claiming scriptability. Use `references/scripting_policy.md` before generating Python or Lua. Use `references/action_card_schema.md` when adding or revising action cards. Use `sources/sources.yaml` and `sources/version_matrix.yaml` when grounding version- or edition-specific claims.
 
 ## Default User Response
 
@@ -122,3 +128,4 @@ If a menu, shortcut, API, codec, license feature, or workflow varies by version,
 - Add source records before adding version-specific facts.
 - Add evaluation tasks for any new safety rule, API workflow, or action card.
 - Run `scripts/validate_skill_assets.py` and the skill validator after edits.
+- Keep platform capability rules in `adapters/generic-agent/runtime_contract.md`; do not move platform-specific assumptions into core action cards.

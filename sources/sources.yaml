@@ -1,5 +1,5 @@
 sources:
-  - id: "installed-developer-docs"
+  - id: "installed-developer-docs-user"
     title: "DaVinci Resolve Developer Documentation"
     publisher: "Blackmagic Design"
     source_type: "installed_developer_doc"
@@ -12,10 +12,11 @@ sources:
       - project_manager
     version: "user_installed_version"
     local_path: "Help > Documentation > Developer"
-    last_verified: "user_or_agent_to_fill"
-    notes: "Use for exact API objects, method names, return values, and script locations."
-  - id: "bmd-product-overview"
-    title: "DaVinci Resolve Product Overview"
+    installed_readme_last_updated: "2025-10-07"
+    last_verified: "2026-05-31"
+    notes: "Use for exact API objects, method names, return values, and script locations. This repository verified the local macOS installed Scripting README on 2026-05-31; users must re-check their own installed version."
+  - id: "bmd-product-overview-21"
+    title: "DaVinci Resolve 21 Product Overview"
     publisher: "Blackmagic Design"
     source_type: "official_product_page"
     trust_level: "primary_official"
@@ -23,10 +24,11 @@ sources:
       - overview
       - editions
       - pages
-    version: "current_web"
-    last_verified: "YYYY-MM-DD"
-    notes: "Use for high-level capabilities only; do not infer exact API or menu behavior."
-  - id: "bmd-training-resolve"
+    version: "21"
+    url: "https://www.blackmagicdesign.com/products/davinciresolve"
+    last_verified: "2026-05-31"
+    notes: "Use for current high-level page and feature overview, including Resolve 21 and Photo page. Do not infer exact API or menu behavior."
+  - id: "bmd-training-resolve-20"
     title: "DaVinci Resolve Training"
     publisher: "Blackmagic Design"
     source_type: "official_training"
@@ -37,9 +39,10 @@ sources:
       - fusion
       - fairlight
       - beginner_workflows
-    version: "current_web"
-    last_verified: "YYYY-MM-DD"
-    notes: "Use for workflow grounding, not unverified automation details."
+    version: "20"
+    url: "https://www.blackmagicdesign.com/products/davinciresolve/training"
+    last_verified: "2026-05-31"
+    notes: "Use for Resolve 20 workflow grounding. Do not treat version-specific menus, APIs, or feature availability as Resolve 21 facts without verification."
   - id: "community-reference-placeholder"
     title: "Community Reference Placeholder"
     publisher: "community"

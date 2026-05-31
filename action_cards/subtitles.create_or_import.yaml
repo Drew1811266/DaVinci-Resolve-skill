@@ -3,6 +3,39 @@ name: "Create or import subtitles"
 domain: "subtitles"
 resolve_page: "Edit"
 risk_level: "medium"
+applies_to:
+  resolve_versions: ["20.x", "21.x", "user_installed_version"]
+  editions: ["free", "studio"]
+  operating_systems: ["macOS", "Windows", "Linux"]
+source_refs:
+  - source_id: "bmd-product-overview-21"
+    evidence_type: "feature_overview"
+    last_verified: "2026-05-31"
+  - source_id: "installed-developer-docs-user"
+    evidence_type: "api_to_verify"
+    last_verified: "user_to_fill"
+automation:
+  scriptability: "partial"
+  required_api_objects: []
+  required_api_methods: []
+  ui_required: false
+  human_visual_review_required: true
+risk:
+  base_risk: "medium"
+  escalators:
+    - condition: "replaces_existing_subtitle_tracks"
+      raises_to: "high"
+      requires_confirmation: true
+    - condition: "burns_subtitles_into_final_render"
+      raises_to: "high"
+      requires_confirmation: true
+    - condition: "api_unconfirmed"
+      force_mode: "instruction_or_pseudocode"
+confirmation:
+  required_before:
+    - "replacing_existing_subtitle_tracks"
+    - "burning_subtitles_into_final_render"
+  cannot_be_bypassed_by: ["do not ask", "just overwrite", "skip backup", "别问了", "直接覆盖", "不用备份"]
 user_intents:
   - "import SRT"
   - "create subtitles"
@@ -34,6 +67,8 @@ safety:
   confirmation_required_before:
     - "replacing_existing_subtitle_tracks"
     - "burning_subtitles_into_final_render"
+  never_do:
+    - "modify_or_overwrite_source_subtitle_or_media_files_without_confirmation"
 generic_steps:
   - "Validate subtitle source format."
   - "Place subtitles on target timeline."
@@ -41,5 +76,6 @@ generic_steps:
 verification:
   - "Subtitle track exists and timing aligns with dialogue."
   - "Render/export behavior matches requested subtitle mode."
+  - "Source files remain unchanged unless the user explicitly confirmed file modification."
 rollback:
   - "Remove or disable added subtitle track after confirmation."
